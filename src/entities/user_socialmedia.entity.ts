@@ -22,8 +22,15 @@ export class UserSocialMedia extends BaseEntity{
     @Column()
     profile_pic: string;
 
+    @Column({default:true})
+    isActive: boolean;
+
+    @Column({default: 'user' })
+    role:string;
+
     @OneToMany(()=>UserPost,(post)=>post.user)
     posts: UserPost[];
+
 
     @OneToMany(()=>Comment,(comment)=>comment.user_comment)
     comments: Comment[];
@@ -33,7 +40,7 @@ export class UserSocialMedia extends BaseEntity{
  
     @OneToMany(()=>FollowUnfollw,(follow)=>follow.user_id)
     @JoinColumn({name:'user_id'})
-    followers: FollowUnfollw[];//followers
+    followers: FollowUnfollw[];
 
     @OneToMany(()=>FollowUnfollw,(follow)=>follow.following)
     @JoinTable({name:'following'})

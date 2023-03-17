@@ -1,10 +1,15 @@
-import { Injectable } from "@nestjs/common";
+import { Inject, Injectable } from "@nestjs/common";
 import { PassportStrategy } from "@nestjs/passport";
+import { InjectRepository } from "@nestjs/typeorm";
 import { ExtractJwt, Strategy } from "passport-jwt";
+import { UserSocialMedia } from "src/entities/user_socialmedia.entity";
+import { Repository } from "typeorm";
 
 @Injectable()
 export class JwtStrategy extends PassportStrategy(Strategy, 'jwt') {
-   constructor() {
+   constructor(
+      @InjectRepository(UserSocialMedia) private userRepository:Repository<UserSocialMedia>
+   ) {
       super({
          jwtFromRequest: function(req) {
             var jwt = null;
@@ -19,10 +24,10 @@ export class JwtStrategy extends PassportStrategy(Strategy, 'jwt') {
       })
    }
    async validate(payload: any){
-
+      const user = await this.userRepository.findOne({where:{email: payload.email}})
       return {
-         email: payload.email
-         
+         id: payload.id,
+         user: user
       }
    }
 

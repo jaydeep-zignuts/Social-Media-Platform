@@ -10,9 +10,9 @@ export class PostDto{
     @IsNotEmpty()
     post_name: string;
 
-    @IsNotEmpty()
     post_image: string;
-
+    
+    @IsNotEmpty()
     post_caption: string;
 
     user: number;

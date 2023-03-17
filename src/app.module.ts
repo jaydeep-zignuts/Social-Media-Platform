@@ -9,13 +9,14 @@ import { UsersModule } from './modules/users/users.module';
 import { AuthModule } from './modules/auth/auth.module';
 import { JwtModule } from '@nestjs/jwt';
 import { PostModule } from './modules/post/post.module';
+import { AdminModule } from './modules/admin/admin.module';
+import { AuthService } from './modules/auth/auth.service';
 
 @Module({
   imports: [ 
     UsersModule,
     ConfigModule.forRoot({ isGlobal: true }),
     TypeOrmModule.forRootAsync(TypeOrmAsyncConfig),
-    AuthModule,
     PostModule,
     {
       ...JwtModule.register({
@@ -25,7 +26,9 @@ import { PostModule } from './modules/post/post.module';
         },
       }),
       global: true
-    }
+    },
+    AdminModule,
+    AuthModule
   ],
   controllers: [AppController],
   providers: [AppService], 

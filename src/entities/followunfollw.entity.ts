@@ -8,14 +8,15 @@ export class FollowUnfollw extends BaseEntity{
     @PrimaryGeneratedColumn()
     id: number;
 
-    
+
     @ManyToOne(()=>UserSocialMedia, (user)=>user.followers,{ onDelete:"CASCADE" })
     @JoinColumn({name:'user_id'})
-    user_id:UserSocialMedia[];
+    user_id:UserSocialMedia;
     
    
     @ManyToOne(()=>UserSocialMedia, (user)=>user.following,{ onDelete:"CASCADE" })
     @JoinColumn({name:'following'})
-    following: UserSocialMedia[];  
+    following: UserSocialMedia;  
    
-}     
+}
+     
