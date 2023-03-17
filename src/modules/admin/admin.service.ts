@@ -54,7 +54,7 @@ export class AdminService{
             } catch (e) {
                 return res.status(HttpStatus.INTERNAL_SERVER_ERROR).json({
                     status: 500,
-                    data: e.message
+                    message: e.message
                 });
             }
         }
@@ -68,13 +68,13 @@ export class AdminService{
                 const inactive= await this.userRepository.update({id:id},{isActive:false});
                 return res.status(HttpStatus.OK).json({
                     status:200,
-                    message: inactive
+                    data: inactive
                 });;
             }else{
                 const active= await this.userRepository.update({id:id},{isActive:true});
                 return res.status(HttpStatus.OK).json({
                     status:200,
-                    message: active
+                    data: active
                 });
             }
         }catch(e){
@@ -97,7 +97,7 @@ export class AdminService{
     
             return res.status(HttpStatus.OK).json({
                 status: 200,
-                message: getPostByUser
+                data: getPostByUser
             })
         }catch(e){
             return e.status(500).json({

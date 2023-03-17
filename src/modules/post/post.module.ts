@@ -24,12 +24,12 @@ import { PostService } from './post.service';
             dest: './post_image',
          
         }) ,
-        JwtModule.register({
-            secret:'secret',
-            signOptions:{
-                expiresIn: '1d',
-                }
-            }),
+        // JwtModule.register({
+        //     secret:'secret',
+        //     signOptions:{
+        //         expiresIn: '1d',
+        //         }
+        //     }),
             UsersModule
     ],
     providers:[PostService, ],

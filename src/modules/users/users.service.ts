@@ -47,22 +47,13 @@ export class UserService{
     }
 
     async getUserById(id:number){
-        try{
             const admin=await this.userRepository.findOne({where:{id}});
             return admin;
-        }catch(e){
-            return e.status(500).json({
-                message: e.message,
-                status:500
-            })
-        }
     }
-    
     async findUserByEmail(email:string){
-        const user = await this.userRepository.findOne({where:{email:email}})
-        return user;    
+            const user = await this.userRepository.findOne({where:{email:email}})
+            return user;
     }
-    
     async findUserById(id:number){
         const user = await this.userRepository.findOne({where:{id:id}, relations:['comments','posts']})
         return user;

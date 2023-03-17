@@ -17,12 +17,12 @@ import { UserService } from './users.service';
         dest: './profile_image',
     
     }),
-    JwtModule.register({
-        secret:'secret',
-        signOptions:{
-            expiresIn: '1d',
-            }
-        }),
+    // JwtModule.register({
+    //     secret:'secret',
+    //     signOptions:{
+    //         expiresIn: '1d',
+    //         }
+    //     }),
         
     ], 
     providers:[UserService],

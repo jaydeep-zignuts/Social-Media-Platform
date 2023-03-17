@@ -18,6 +18,8 @@ export class UserController{
         private jwtService: JwtService
     ){}
     
+
+    //create user or signup
     @Post('createUser')
     @UsePipes(ValidationPipe)
     @UseInterceptors(FileInterceptor('profile_pic',{
@@ -41,7 +43,7 @@ export class UserController{
         return await this.userService.createUser(user, file.filename,res);
     }
 
-
+    //change password
     @Patch('changePassword')
     @UseGuards(JwtAuthGuard)
     @UseGuards(RolesGuard)
@@ -55,6 +57,7 @@ export class UserController{
         return await this.userService.changePassword(id,password, res);
     }
 
+    //update profile details
     @Patch('updateProfile')
     @UseInterceptors(FileInterceptor('profile_pic'))
     @UsePipes(ValidationPipe)
@@ -70,6 +73,7 @@ export class UserController{
         
     }
 
+    //see other user profile and uid is the id of other user using which we are able to see profile of that user
     @Get('othersProfile/:uid')
     @UseGuards(JwtAuthGuard)
     @UsePipes(ValidationPipe)
@@ -79,6 +83,7 @@ export class UserController{
         return await this.userService.otherUserProfile(id, res);
     }
 
+    //logout
     @Get('logout')
     @UsePipes(ValidationPipe)
     @UseGuards(JwtAuthGuard)
@@ -108,6 +113,7 @@ export class UserController{
         return await this.userService.followUser(uid,cid, res);
     }
 
+    //get list of following users
     @Get('following')
     @UseGuards(JwtAuthGuard)
     @UsePipes(ValidationPipe)
@@ -122,6 +128,8 @@ export class UserController{
 
         return await this.userService.following(cid,res);
     }
+
+    //get list of followers
     @Get('followers')
     @UseGuards(JwtAuthGuard)
     @UsePipes(ValidationPipe)
@@ -137,6 +145,7 @@ export class UserController{
         return await this.userService.followers(cid, res);
     }
 
+    //unfollow user and uid is the id of user whom i want to unfollow
     @Post('unfollow/:uid')
     @UseGuards(JwtAuthGuard)
     @UsePipes(ValidationPipe)

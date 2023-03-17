@@ -14,14 +14,14 @@ export class AdminController{
         private adminService: AdminService,
     ) { }
    
-    // @UseGuards(RolesGuard)
-    // @Roles('admin')
+    //get lists of all the users
     @UseGuards(AdminRoleGuard)
     @Get('allUser')
     async allUser(@Res() res:Response,  @Query() { page, take , user_name },){
         return await this.adminService.getAllUser(res ,page, take, user_name);
     }
 
+    //activate or inactivate users
     @UseGuards(AdminRoleGuard)
     @Patch('activeInactive/:id')
     async activeInactive(@Param('id') id:number,@Res() res:Response)
@@ -30,6 +30,7 @@ export class AdminController{
         
     }
 
+    //get posts by speacific user
     @UseGuards(AdminRoleGuard)
     @Get('getPostByUser/:id')
     async getPostByUser(@Param('id') id:number,@Res() res:Response ){

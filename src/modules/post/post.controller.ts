@@ -22,6 +22,7 @@ export class PostController{
         private userService: UserService
         ){}
 
+    //create new post
     @Post('createPost')
     @UsePipes(ValidationPipe)
     @UseGuards(RolesGuard)
@@ -52,6 +53,7 @@ export class PostController{
         return await this.postService.createPost(postData, file.filename, user,res)
     }
  
+    //get post of current user
     @Get('posts')
     @UseGuards(RolesGuard)
     @Roles('user')
@@ -63,8 +65,7 @@ export class PostController{
         return await this.postService.getPosts(user.id,page,take,res);
     }
 
-
-
+    //add comment on post and pid is post id on which we need to add comment
     @Post('addComment/:pid')
     @UseGuards(RolesGuard)
     @Roles('user')
@@ -78,6 +79,7 @@ export class PostController{
         return await this.postService.addComment(comment.comment,post, uid, res);
     }
 
+    //like post and pid is post id on which we want to like
     @Post('likePost/:pid')
     @UseGuards(RolesGuard)
     @Roles('user')
@@ -88,6 +90,8 @@ export class PostController{
 
         return await this.postService.addLike(id ,uid, res);
     }
+
+    //dislike post and pid is post id on which we want to dislike
     @Post('dislikePost/:pid')
     @UseGuards(RolesGuard)
     @Roles('user')
