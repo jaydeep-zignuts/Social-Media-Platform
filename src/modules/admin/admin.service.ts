@@ -3,8 +3,6 @@ import { InjectRepository } from "@nestjs/typeorm";
 import { UserSocialMedia } from "src/entities/user_socialmedia.entity";
 import { Repository } from "typeorm";
 import * as bcrypt from 'bcrypt'
-import { AdminDto } from "src/dto/admin.dto";
-import { take } from "rxjs";
 import { UserPost } from "src/entities/userpost.entity";
 import { Response } from "express";
 
