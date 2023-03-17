@@ -46,7 +46,7 @@ export class UserController{
     //change password
     @Patch('changePassword')
     @UseGuards(JwtAuthGuard)
-    @UseGuards(RolesGuard)
+    // @UseGuards(RolesGuard)
     @Roles('user')
     @UsePipes(ValidationPipe)
     async changePassword(@Body('password') password: string,@Req() req:Request, @Res() res:Response ){
@@ -62,7 +62,7 @@ export class UserController{
     @UseInterceptors(FileInterceptor('profile_pic'))
     @UsePipes(ValidationPipe)
     @UseGuards(JwtAuthGuard)
-    @UseGuards(RolesGuard)
+    // @UseGuards(RolesGuard)
     @Roles('user')
     async updateProfile(@Body() userData: UserSocialMediaDto, @Req() req:Request,@UploadedFile() file: Express.Multer.File,@Res() res:Response ){
         const token = req.cookies['jwt'];
@@ -77,7 +77,7 @@ export class UserController{
     @Get('othersProfile/:uid')
     @UseGuards(JwtAuthGuard)
     @UsePipes(ValidationPipe)
-    @UseGuards(RolesGuard)
+    // @UseGuards(RolesGuard)
     @Roles('user')
     async othersProfile(@Param('uid') id: number,@Res() res:Response){
         return await this.userService.otherUserProfile(id, res);
@@ -86,9 +86,9 @@ export class UserController{
     //logout
     @Get('logout')
     @UsePipes(ValidationPipe)
-    @UseGuards(JwtAuthGuard)
-    @UseGuards(RolesGuard)
-    @Roles('user')
+    // @UseGuards(JwtAuthGuard)
+    // @UseGuards(RolesGuard)
+    // @Roles('user')
     async logout(@Res() response:Response){
         
         return response.clearCookie('jwt').status(HttpStatus.OK).json({
@@ -101,7 +101,7 @@ export class UserController{
     @Post('follow/:uid')
     @UsePipes(ValidationPipe)
     @UseGuards(JwtAuthGuard)
-    @UseGuards(RolesGuard)
+    // @UseGuards(RolesGuard)
     @Roles('user')
     async followUser(@Param('uid') uid:number, @Req() req:Request,@Res() res:Response){
         const token = req.cookies['jwt'];
@@ -109,6 +109,7 @@ export class UserController{
         
         //cid is current user id
         const cid = jwtData["id"];
+console.log("jwt",cid);
 
         return await this.userService.followUser(uid,cid, res);
     }
@@ -117,7 +118,7 @@ export class UserController{
     @Get('following')
     @UseGuards(JwtAuthGuard)
     @UsePipes(ValidationPipe)
-    @UseGuards(RolesGuard)
+    // @UseGuards(RolesGuard)
     @Roles('user')
     async following(@Req() req:Request,@Res() res:Response){
         const token = req.cookies['jwt'];
@@ -133,7 +134,7 @@ export class UserController{
     @Get('followers')
     @UseGuards(JwtAuthGuard)
     @UsePipes(ValidationPipe)
-    @UseGuards(RolesGuard)
+    // @UseGuards(RolesGuard)
     @Roles('user')
     async followers(@Req() req:Request, @Res() res:Response){
         const token = req.cookies['jwt'];
@@ -149,7 +150,7 @@ export class UserController{
     @Post('unfollow/:uid')
     @UseGuards(JwtAuthGuard)
     @UsePipes(ValidationPipe)
-    @UseGuards(RolesGuard)
+    // @UseGuards(RolesGuard)
     @Roles('user')
     async unfollow(@Req() req:Request, @Param('uid') uid:number, @Res() res:Response){
         const token = req.cookies['jwt'];

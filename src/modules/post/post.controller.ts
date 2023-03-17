@@ -42,14 +42,13 @@ export class PostController{
               callback(null, filename);
             }
           })
-    }))
+    })) 
     async createPost(@Body() postData: PostDto, @UploadedFile() file: Express.Multer.File,  @Req() req:Request, @Res() res: Response){
         const token = req.cookies['jwt'];
         const jwtData = await this.jwtService.verify(token);
         const id = jwtData["id"];       
         const user= await this.userService.findUserById(id);
-       console.log(file);
-        
+        console.log(file);
         return await this.postService.createPost(postData, file.filename, user,res)
     }
  
