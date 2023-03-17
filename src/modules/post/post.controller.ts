@@ -25,7 +25,7 @@ export class PostController{
     //create new post
     @Post('createPost')
     @UsePipes(ValidationPipe)
-    @UseGuards(RolesGuard)
+    // @UseGuards(RolesGuard)
     @Roles('user')
     @UseInterceptors(FileInterceptor('post_image',{
         storage: diskStorage({
@@ -54,7 +54,7 @@ export class PostController{
  
     //get post of current user
     @Get('posts')
-    @UseGuards(RolesGuard)
+    // @UseGuards(RolesGuard)
     @Roles('user')
     async getPosts(@Req() req:Request,@Query() { page, take }, @Res() res: Response ){
         const token = req.cookies['jwt'];
@@ -66,7 +66,7 @@ export class PostController{
 
     //add comment on post and pid is post id on which we need to add comment
     @Post('addComment/:pid')
-    @UseGuards(RolesGuard)
+    // @UseGuards(RolesGuard)
     @Roles('user')
     async addComment(@Body() comment: CommentDto, @Param('pid') id:number,@Req() req:Request, @Res() res: Response){
       
@@ -80,7 +80,7 @@ export class PostController{
 
     //like post and pid is post id on which we want to like
     @Post('likePost/:pid')
-    @UseGuards(RolesGuard)
+    // @UseGuards(RolesGuard)
     @Roles('user')
     async addLike(@Param('pid') id:number, @Req() req:Request, @Res() res: Response){
         const token = req.cookies['jwt'];
@@ -92,7 +92,7 @@ export class PostController{
 
     //dislike post and pid is post id on which we want to dislike
     @Post('dislikePost/:pid')
-    @UseGuards(RolesGuard)
+    // @UseGuards(RolesGuard)
     @Roles('user')
     async dislikePost(@Param('pid') id:number, @Req() req:Request, @Res() res: Response ){
         const token = req.cookies['jwt'];
