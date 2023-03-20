@@ -11,6 +11,7 @@ import { ErrorHttpStatusCode } from "@nestjs/common/utils/http-error-by-code.uti
 import { ErrorCode } from "multer";
 import { Response, response } from "express";
 import { HttpExceptionFilter } from "src/exception/httpException.filter";
+import { UpdateUserSocialMedia } from "src/dto/updateUserDto.dto";
 
 @Injectable()
 export class UserService{
@@ -77,7 +78,7 @@ export class UserService{
             })
         }
     }
-    async updateProfileData(userData: UserSocialMediaDto, id:number,file:string, res: Response){
+    async updateProfileData(userData: UpdateUserSocialMedia, id:number,file:string, res: Response){
        try{
         const pass = await this.userRepository.update( 
             {id: id },

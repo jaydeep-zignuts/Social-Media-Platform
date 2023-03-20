@@ -4,6 +4,7 @@ import { FileInterceptor } from "@nestjs/platform-express";
 import { Request, response, Response } from "express";
 import { diskStorage } from "multer";
 import { extname } from "path";
+import { UpdateUserSocialMedia } from "src/dto/updateUserDto.dto";
 import { UserSocialMediaDto } from "src/dto/user_socialmedia.dto";
 import { HttpExceptionFilter } from "src/exception/httpException.filter";
 import { JwtAuthGuard } from "../auth/jwt-auth.guard";
@@ -64,7 +65,7 @@ export class UserController{
     @UseGuards(JwtAuthGuard)
     // @UseGuards(RolesGuard)
     @Roles('user')
-    async updateProfile(@Body() userData: UserSocialMediaDto, @Req() req:Request,@UploadedFile() file: Express.Multer.File,@Res() res:Response ){
+    async updateProfile(@Body() userData:Partial<UpdateUserSocialMedia>, @Req() req:Request,@UploadedFile() file: Express.Multer.File,@Res() res:Response ){
         const token = req.cookies['jwt'];
         const jwtData = await this.jwtService.verify(token);
         const id = jwtData["id"];

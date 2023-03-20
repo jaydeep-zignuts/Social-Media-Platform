@@ -1,8 +1,10 @@
+import { PartialType } from "@nestjs/swagger";
 import { IsEmail, isNotEmpty, IsNotEmpty, IsNotEmptyObject } from "class-validator";
 import { FollowUnfollw } from "src/entities/followunfollw.entity";
 import { LikeDislike } from "src/entities/likedislike.entity";
 import { UserPost } from "src/entities/userpost.entity";
 import { Column, ManyToMany, Unique } from "typeorm";
+import { UpdateUserSocialMedia } from "./updateUserDto.dto";
 
 export class UserSocialMediaDto{
 
