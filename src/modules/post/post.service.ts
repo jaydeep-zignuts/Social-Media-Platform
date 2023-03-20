@@ -163,9 +163,10 @@ console.log(like);
                 });
                 
             }else{  
-                return {
-                    message:"already disliked post"
-                }
+                return res.status(HttpStatus.OK).json({
+                    status:200,
+                    message: "Already disliked post"
+                })
             }
         }catch(e){
             return res.status(HttpStatus.INTERNAL_SERVER_ERROR).json({
