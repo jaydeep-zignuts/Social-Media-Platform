@@ -106,11 +106,13 @@ const user= await this.userRepository.findOne( {where:{ id:uid }, relations:['li
         .leftJoinAndSelect('l.user_like', 'ul')
         .where(`ul.id = ${uid} and pl.id = ${pid}`)
         .getCount();
+console.log(like);
 
         if(like===1){
-            return {
-                message: 'Already liked this post'
-            }
+            return res.status(HttpStatus.OK).json({
+                message: 'You already liked this post'
+                
+            })
         }else{  
             const like = await this.likedisRepository.save({});
             post.like = [like, ...post.like];
@@ -124,9 +126,9 @@ const user= await this.userRepository.findOne( {where:{ id:uid }, relations:['li
             });
         }
         }catch(e){
-            return res.status(HttpStatus.INTERNAL_SERVER_ERROR).json({
-                statsu:500,
-                message: e.message
+            return res.status(500).json({
+                status:500,
+                message: e
             });
         }
         
